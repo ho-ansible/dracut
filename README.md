@@ -1,8 +1,8 @@
-# Ansible role: template
-Brief description of role.
+# Ansible role: dracut
+Assemble initramfs.
 
 ## Requirements
-Only tested on Debian stable, for now.
+Debian stable with an installed kernel
 
 ## Role Variables
 + `variable`: description

@@ -1,10 +1,10 @@
 #! /usr/bin/env ansible-playbook
-# Configure template role
+# Configure dracut role
 # Replace 'all' with your own inventory group
 ---
-- name: template | template role
+- name: dracut | create initramfs
   hosts: all
   roles:
-  - role: template
+  - role: dracut
     tags:
-    - template
+    - dracut
