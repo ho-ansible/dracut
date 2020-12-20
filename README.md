@@ -1,5 +1,6 @@
 # Ansible role: dracut
-Assemble initramfs.
+Enable this role on a host in order to build an initramfs.
+I use this to build a common initramfs for PXE boot.
 
 ## Requirements
 Debian stable with an installed kernel
