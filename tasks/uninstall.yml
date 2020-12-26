@@ -1,1 +1,22 @@
 ---
+
+- name: dracut | uninstall packages
+  tags:
+  - package
+  package:
+    name: dracut-network
+    state: absent
+
+- name: dracut | remove config
+  tags:
+  - config
+  file:
+    path: "{{ dracut_conf_path }}"
+    state: absent
+
+- name: dracut | remove extra includes
+  tags:
+  - template
+  file:
+    path: "{{ dracut_extra_dir }}"
+    state: absent

@@ -1,1 +1,26 @@
 ---
+
+- name: dracut | packages
+  tags:
+  - package
+  package:
+    name: dracut-network
+
+- name: dracut | config
+  tags:
+  - config
+  template:
+    src: dracut.conf.j2
+    dest: "{{ dracut_conf_path }}"
+
+- name: dracut | dirs for extra includes
+  file:
+    path: "{{ dracut_extra_dir }}/{{ item.key | dirname }}"
+    state: directory
+  loop: "{{ dracut_extra | dict2items }}"
+
+- name: dracut | extra includes
+  copy:
+    content: "{{ item.value }}"
+    dest: "{{ dracut_extra_dir }}/{{ item.key }}"
+  loop: "{{ dracut_extra | dict2items }}"

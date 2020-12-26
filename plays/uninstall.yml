@@ -2,9 +2,9 @@
 # Uninstall role
 # Run prior to removing host from inventory groups, so hostvars are accessible
 ---
-- name: template | uninstall
-  hosts: all
+- name: dracut | uninstall
+  hosts: dracut
   tasks:
   - include_role:
-      name: template
+      name: dracut
       tasks_from: uninstall.yml

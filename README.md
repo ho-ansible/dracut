@@ -6,8 +6,9 @@ I use this to build a common initramfs for PXE boot.
 Debian stable with an installed kernel
 
 ## Role Variables
-+ `dracut_opts`: options to place under `/etc/dracut.conf.d/`
-+ `dracut_cmdline`: extra command-line options
++ `dracut_conf`: contents of `/etc/dracut.conf`
++ `dracut_extra`: dict of (`path`, `contents`) pairs to add to initramfs
++ `dracut_extra_dir` (default: `/etc/dracut.extra`) target dir for `dracut_extra`
 
 ## Playbooks
 + `main.yml`: apply role

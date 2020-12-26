@@ -1,1 +1,4 @@
 ---
+dracut_conf: 
+dracut_extra: {}
+dracut_extra_dir: /etc/dracut.extra
