@@ -4,7 +4,9 @@
   tags:
   - package
   package:
-    name: dracut-network
+    name: 
+    - intel-microcode
+    - dracut-network
 
 - name: dracut | config
   tags:
