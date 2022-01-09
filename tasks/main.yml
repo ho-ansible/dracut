@@ -15,6 +15,12 @@
     src: dracut.conf.j2
     dest: "{{ dracut_conf_path }}"
 
+- name: dracut | update-dracut.sh tool
+  copy:
+    src: update-dracut.sh
+    dest: /usr/local/bin/
+    mode: '0755'
+
 - name: dracut | dirs for extra includes
   file:
     path: "{{ dracut_extra_dir }}/{{ item.key | dirname }}"
