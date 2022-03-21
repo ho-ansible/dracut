@@ -27,6 +27,7 @@ rsync "/boot/vmlinuz-$ver" "$ver/vmlinuz" || return $?
 # Copy kernel + initramfs to boot server
 rsync -a --chmod=F644 "$ver" "${boothost}:$bootdir/" || return $?
 
-# Enable as new default
-ln -sf "$ver" default
-rsync -l default "${boothost}:$bootdir/"
+# Enable as new testing kernel
+rm -f testing
+ln -s "$ver" testing
+rsync -l testing "${boothost}:$bootdir/"

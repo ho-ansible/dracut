@@ -2,6 +2,8 @@
 Enable this role on a host in order to build an initramfs.
 I use this to build a common initramfs for PXE boot.
 
+Use the included `update-dracut.sh` script to compile an initramfs.
+
 ## Requirements
 Debian stable with an installed kernel
 
