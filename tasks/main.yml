@@ -22,10 +22,12 @@
     mode: '0755'
 
 - name: dracut | dirs for extra includes
+  tags:
+  - dirs
   file:
-    path: "{{ dracut_extra_dir }}/{{ item.key | dirname }}"
+    path: "{{ dracut_extra_dir }}/{{ item }}"
     state: directory
-  loop: "{{ dracut_extra | dict2items }}"
+  loop: "{{ dracut_extra | list | map('dirname') }}"
 
 - name: dracut | extra includes
   copy:
