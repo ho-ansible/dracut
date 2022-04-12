@@ -1,33 +1,32 @@
 #! /bin/sh
 # Usage: $0 5.10.0-0.bpo.3-amd64 (or similar kernel ver)
 
-boothost=boot
-bootdir=/var/www/linux
+bootdir="boot:/var/www/linux"
+tmpdir=/tmp/dracut
 
 # Get kernel version
-if [ "$#" -gt 0 ]; then
-  ver="$1"
-  shift
-else
-  ver=$(uname -r)
-fi
+for ver in $(uname -r) $(ls /boot/vmlinuz-*) $1; do :; done
 
 # Sanitise somewhat: basename
 ver=${ver##*/}
+ver=${ver##vmlinuz-}
 
-# Create local dir for kernel + initramfs
-mkdir -p /tmp/dracut || return $?
-cd /tmp/dracut
+# Remaining args are passed to dracut
+[ $# -gt 0 ] && shift
+
+echo "Copying kernel to $tmpdir/$ver"
+mkdir -p $tmpdir || return $?
+cd $tmpdir
 mkdir -p "$ver"
 rsync "/boot/vmlinuz-$ver" "$ver/vmlinuz" || return $?
 
-# Create initramfs
+echo "Running dracut"
 /usr/bin/dracut -i /etc/dracut.extra / -f "$ver/initrd.img" "$ver" $@ || return $?
 
-# Copy kernel + initramfs to boot server
-rsync -a --chmod=F644 "$ver" "${boothost}:$bootdir/" || return $?
+echo "Copying to boot location $bootdir"
+rsync -a --chmod=F644 "$ver" "$bootdir/" || return $?
 
-# Enable as new testing kernel
+echo "Enabling as new testing kernel at $bootdir/testing"
 rm -f testing
 ln -s "$ver" testing
-rsync -l testing "${boothost}:$bootdir/"
+rsync -l testing "$bootdir/"
