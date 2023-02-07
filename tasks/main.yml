@@ -6,6 +6,7 @@
   package:
     name: 
     - intel-microcode
+    - amd64-microcode
     - dracut-network
     - binutils
 
