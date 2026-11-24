@@ -5,7 +5,7 @@ bootdir="boot:/var/www/linux"
 tmpdir=/tmp/dracut
 
 # Get kernel version
-for ver in $(uname -r) $(ls /boot/vmlinuz-*) $1; do :; done
+for ver in $(uname -r) $(ls /boot/vmlinuz-* | sort -V) $1; do :; done
 
 # Sanitise somewhat: basename
 ver=${ver##*/}
